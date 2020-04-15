@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Color;
 import android.hardware.ConsumerIrManager;
@@ -13,9 +14,11 @@ import android.os.Bundle;
 import android.se.omapi.Session;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -42,7 +45,13 @@ public class DrugiFragment extends Fragment {
     private RequestQueue mQue;
     private String izabranTV;
     private Button btnBack;
-    private Button btnPower;
+
+    private ImageView tvPower;
+    private ImageView up;
+    private ImageView down;
+
+
+
 
 
     @Nullable
@@ -53,7 +62,14 @@ public class DrugiFragment extends Fragment {
         izabranTV = bundle.getString("TV");
         Log.d("MARKA", izabranTV);
         btnBack = rootView.findViewById(R.id.btnBack);
-        btnPower = rootView.findViewById(R.id.tvpower);
+       // btnPower = rootView.findViewById(R.id.tvpower);
+
+        tvPower = rootView.findViewById(R.id.tvpower);
+        up = rootView.findViewById(R.id.tvchnext);
+        down = rootView.findViewById(R.id.tvchprev);
+
+
+
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -72,6 +88,7 @@ public class DrugiFragment extends Fragment {
         return rootView;
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     private void ucitajSpec(final String marka, View rootView) {
         String url = "https://api.myjson.com/bins/p1jiq";
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
@@ -101,14 +118,72 @@ public class DrugiFragment extends Fragment {
             }
         });
         mQue.add(request);
-        rootView.findViewById(R.id.tvpower).setOnClickListener(new View.OnClickListener() {
+
+        //da lepo svetli kad se stisne
+        tvPower.setOnTouchListener(new View.OnTouchListener() {
             @Override
-            public void onClick(View v) {
-                btnPower.setBackgroundColor(Color.RED);
-                hex2ir(CMD_TV_POWER);
+            public boolean onTouch(View v, MotionEvent event) {
+                switch(event.getAction()) {
+                    case MotionEvent.ACTION_DOWN:
+                        // Do something
+                        tvPower.setImageResource(R.drawable.power_active);
+                        return true;
+                    case MotionEvent.ACTION_UP:
+                        tvPower.setImageResource(R.drawable.poveroff);
+                        // No longer down
+
+                        return true;
+                }
+                return false;
             }
         });
 
+        up.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                switch(event.getAction()) {
+                    case MotionEvent.ACTION_DOWN:
+                        // Do something
+
+                        up.setBackgroundResource(R.drawable.up_and_down_pressed);
+                        up.setImageResource(R.drawable.up_pressed);
+                        return true;
+                    case MotionEvent.ACTION_UP:
+                        up.setBackgroundResource(R.drawable.up_and_down_released);
+                        up.setImageResource(R.drawable.up);
+
+                        // No longer down
+
+                        return true;
+                }
+                return false;
+            }
+        });
+
+        down.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                switch(event.getAction()) {
+                    case MotionEvent.ACTION_DOWN:
+                        // Do something
+                        down.setBackgroundResource(R.drawable.up_and_down_pressed);
+                        down.setImageResource(R.drawable.down_pressed);
+                        return true;
+                    case MotionEvent.ACTION_UP:
+                        down.setBackgroundResource(R.drawable.up_and_down_released);
+                        down.setImageResource(R.drawable.down);
+                        // No longer down
+
+                        return true;
+                }
+                return false;
+            }
+        });
+
+
+
+
+        rootView.findViewById(R.id.tvpower).setOnClickListener(new ClickListener(hex2ir(CMD_TV_CH_NEXT)));
         rootView.findViewById(R.id.tvchnext).setOnClickListener(new ClickListener(hex2ir(CMD_TV_CH_NEXT)));
         rootView.findViewById(R.id.tvchprev).setOnClickListener(new ClickListener(hex2ir(CMD_TV_CH_PREV)));
 //        rootView.findViewById(R.id.sbvoldown).setOnClickListener(new ClickListener(hex2ir(CMD_SB_VOLDOWN)));
