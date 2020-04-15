@@ -7,6 +7,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.hardware.ConsumerIrManager;
 import android.os.Bundle;
 import android.se.omapi.Session;
@@ -41,6 +42,7 @@ public class DrugiFragment extends Fragment {
     private RequestQueue mQue;
     private String izabranTV;
     private Button btnBack;
+    private Button btnPower;
 
 
     @Nullable
@@ -51,6 +53,7 @@ public class DrugiFragment extends Fragment {
         izabranTV = bundle.getString("TV");
         Log.d("MARKA", izabranTV);
         btnBack = rootView.findViewById(R.id.btnBack);
+        btnPower = rootView.findViewById(R.id.tvpower);
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -98,7 +101,14 @@ public class DrugiFragment extends Fragment {
             }
         });
         mQue.add(request);
-        rootView.findViewById(R.id.tvpower).setOnClickListener(new ClickListener(hex2ir(CMD_TV_POWER)));
+        rootView.findViewById(R.id.tvpower).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                btnPower.setBackgroundColor(Color.RED);
+                hex2ir(CMD_TV_POWER);
+            }
+        });
+
         rootView.findViewById(R.id.tvchnext).setOnClickListener(new ClickListener(hex2ir(CMD_TV_CH_NEXT)));
         rootView.findViewById(R.id.tvchprev).setOnClickListener(new ClickListener(hex2ir(CMD_TV_CH_PREV)));
 //        rootView.findViewById(R.id.sbvoldown).setOnClickListener(new ClickListener(hex2ir(CMD_SB_VOLDOWN)));
