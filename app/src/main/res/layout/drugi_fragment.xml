@@ -21,35 +21,11 @@
         app:layout_constraintVertical_bias="0.098" />
 
     <ImageView
-        android:id="@+id/sbvolup"
-        android:layout_width="74dp"
-        android:layout_height="75dp"
-        android:layout_alignTop="@+id/tvpower"
-        android:layout_marginTop="244dp"
-        android:layout_marginEnd="96dp"
-        android:src="@drawable/volumeup"
-        app:layout_constraintEnd_toStartOf="@+id/tvchnext"
-        app:layout_constraintHorizontal_bias="0.903"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageView
-        android:id="@+id/sbvoldown"
-        android:layout_width="74dp"
-        android:layout_height="75dp"
-        android:layout_alignTop="@+id/tvpower"
-        android:layout_marginTop="96dp"
-        android:layout_marginEnd="100dp"
-        android:src="@drawable/volumedown"
-        app:layout_constraintEnd_toStartOf="@+id/tvchprev"
-        app:layout_constraintTop_toBottomOf="@+id/sbvolup" />
-
-    <ImageView
         android:id="@+id/tvchprev"
         android:layout_width="74dp"
         android:layout_height="75dp"
         android:layout_marginTop="96dp"
-        android:layout_marginEnd="88dp"
+        android:layout_marginEnd="168dp"
         android:src="@drawable/down"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvchnext" />
@@ -58,11 +34,11 @@
         android:id="@+id/tvchnext"
         android:layout_width="74dp"
         android:layout_height="75dp"
-        android:layout_marginTop="244dp"
+        android:layout_marginTop="240dp"
         android:layout_marginEnd="84dp"
         android:src="@drawable/up"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.664"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
