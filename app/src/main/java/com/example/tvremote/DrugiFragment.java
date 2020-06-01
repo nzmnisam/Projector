@@ -90,7 +90,7 @@ public class DrugiFragment extends Fragment {
 
     @SuppressLint("ClickableViewAccessibility")
     private void ucitajSpec(final String marka, View rootView) {
-        String url = "https://api.myjson.com/bins/p1jiq";
+        String url = "https://api.jsonbin.io/b/5ed50d7a7741ef56a565f5f0";
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
