@@ -46,15 +46,15 @@ public class PrviFragment extends Fragment {
         markeTV = new ArrayList<>();
         mQue = Volley.newRequestQueue(getActivity());
 
-        markeTV.add("Prvi");
-        markeTV.add("Drugi");
-        markeTV.add("Treci");
+      //  markeTV.add("Prvi");
+      //  markeTV.add("Drugi");
+      //  markeTV.add("Treci");
         ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_dropdown_item, markeTV);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         tvList.setAdapter(adapter);
 
 
-        //ucitajListu();
+        ucitajListu();
 
         btnRemote.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,7 +81,7 @@ public class PrviFragment extends Fragment {
     }
 
     private void ucitajListu() {
-        String url = "https://api.myjson.com/bins/p1jiq";
+        String url = "https://api.jsonbin.io/b/5ed62fcc79382f568bd19c3c";
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
@@ -92,13 +92,13 @@ public class PrviFragment extends Fragment {
                         String name = object.getString("Name");
                         markeTV.add(name);
                     }
-                    markeTV.add("Cmar");
+
                     ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_dropdown_item, markeTV);
                     adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     tvList.setAdapter(adapter);
                 } catch (JSONException e) {
                     e.printStackTrace();
-                    System.out.println("asfsadfsd");
+
 
                 }
             }

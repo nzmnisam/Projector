@@ -90,7 +90,7 @@ public class DrugiFragment extends Fragment {
 
     @SuppressLint("ClickableViewAccessibility")
     private void ucitajSpec(final String marka, View rootView) {
-        String url = "https://api.jsonbin.io/b/5ed50d7a7741ef56a565f5f0/2";
+        String url = "https://api.jsonbin.io/b/5ed62fcc79382f568bd19c3c";
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
@@ -183,7 +183,7 @@ public class DrugiFragment extends Fragment {
 
 
 
-        rootView.findViewById(R.id.tvpower).setOnClickListener(new ClickListener(hex2ir(CMD_TV_CH_NEXT)));
+        rootView.findViewById(R.id.tvpower).setOnClickListener(new ClickListener(hex2ir(CMD_TV_POWER)));
         rootView.findViewById(R.id.tvchnext).setOnClickListener(new ClickListener(hex2ir(CMD_TV_CH_NEXT)));
         rootView.findViewById(R.id.tvchprev).setOnClickListener(new ClickListener(hex2ir(CMD_TV_CH_PREV)));
 //        rootView.findViewById(R.id.sbvoldown).setOnClickListener(new ClickListener(hex2ir(CMD_SB_VOLDOWN)));
